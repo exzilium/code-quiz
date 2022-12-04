@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="style" src="/assets/css/style.css"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Code Quiz</title>
   </head>
   <body>
@@ -13,10 +13,32 @@
       <h3>Time:</h3>
     </header>
     <main>
-      <section id="container">
+        <!-- Game Start Section -->
+      <section id="start-container" class="start visible">
         <h1 id="start-head">Coding Combat</h1>
         <p id="start-desc">Test your might!</p>
         <button id="start-btn">START</button>
+      </section>
+      <!-- Question and Answer Section -->
+      <section id="q-container" class="question hidden">
+        <h2 id="q-head">QUESTION 1</h2>
+        <div id="q-btns">
+          <button id="btn1">START</button>
+          <button id="btn2">START</button>
+          <button id="btn3">START</button>
+          <button id="btn4">START</button>
+        </div>
+        <!-- High Score List Section -->
+      </section>
+      <section id="score-container" class="score hidden">
+        <h1 id="score-head">High Scores</h1>
+        <div id="score-list">
+          <ol>
+            <li>score 123</li>
+          </ol>
+        </div>
+        <button id="back-btn">Go Back</button>
+        <button id="clear-btn">Clear Highscores</button>
       </section>
     </main>
     <!-- JavaScript file -->

@@ -1,4 +1,4 @@
-var gameContainer = document.querySelector("#container");
+var startContainer = document.querySelector("#start-container");
 var startHeader = document.querySelector("#start-head");
 var startDesc = document.querySelector("#start-desc");
 var startBtn = document.querySelector("#start-btn");
@@ -11,7 +11,7 @@ startElementRemove = function () {
 };
 
 startBtn.addEventListener("click", function () {
-  // remove starting elements
+  // hide starting elements
   console.log("start!");
   startElementRemove();
 
@@ -31,8 +31,8 @@ startBtn.addEventListener("click", function () {
   answerEl4.textContent = "answer 4";
 
   // append game elements
-  gameContainer.append(questionEl);
-  gameContainer.append(answerList)
+  startContainer.append(questionEl);
+  startContainer.append(answerList)
   answerList.append(answerEl1);
   answerList.append(answerEl2);
   answerList.append(answerEl3);
