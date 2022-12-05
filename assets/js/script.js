@@ -20,11 +20,12 @@ var answerBtn4 = document.querySelector("#btn4");
 var question1 = {
   question: "Question one text",
   correct: function () {
-    return this.answer4;},
+    return this.answer4;
+  },
   answer1: "Incorrect Answer 1",
   answer2: "Incorrect Answer 2",
   answer3: "Incorrect Answer 3",
-  answer4: "Correct Answer"
+  answer4: "Correct Answer",
 };
 
 // QUESTION 2
@@ -40,10 +41,9 @@ var question2 = {
 };
 
 // ^ End of Questions ^
-
 // ^ End of global variable ^
 
-// --- FUNCTIONS ---
+// --- FUNCTIONS SECTION ---
 
 // Functions to be called when user clicks start button
 startSectionHide = function () {
@@ -53,6 +53,27 @@ startSectionHide = function () {
 questionSectionDisplay = function () {
   questionSection.className = "question visible";
 };
+
+// function for WRONG ANSWER
+
+var wrongAnswerUser = function () {
+  // Create Wrong Answer HTML and append to question section
+    var wrongAnswerP = document.createElement("p");
+  var wrongAnswerHR = document.createElement("hr");
+  wrongAnswerP.innerHTML = "Wrong. Try Again!";
+  questionSection.appendChild(wrongAnswerHR);
+  questionSection.appendChild(wrongAnswerP);
+
+  // Timer to remove HTML
+  setTimeout(function () {
+    wrongAnswerP.remove();
+    wrongAnswerHR.remove();
+  }, 1500);
+
+  // To add, functionality to remove time from timer
+};
+
+// --- QUESTION FUNCTIONS ---
 
 // Question 1 population after START
 var question1Text = function () {
@@ -70,8 +91,8 @@ var question1Text = function () {
   answerBtn2.dataset.correct = question1.correct();
   answerBtn3.dataset.correct = question1.correct();
   answerBtn4.dataset.correct = question1.correct();
-}
-  // Question 2 population
+};
+// Question 2 population
 var question2Text = function () {
   // Populate question header with question1 object question property
   questionHead.textContent = question2.question;
@@ -104,22 +125,17 @@ startBtn.addEventListener("click", function () {
   question1Text();
 });
 
+// IN-GAME ANSWER CHECKING
+
 // Answer button click event listener
 questionBtnDiv.addEventListener("click", function (event) {
-  console.log(
-    "answer button clicked:  " +
-      event.target.id +
-      ".  Correct: " +
-      question1.correct()
-  );
   // if correct run populate next question
   if (event.target.textContent === question1.correct()) {
     console.log("Correct Answer selected!");
     question2Text();
-
   } else {
     console.log("Wrong answer, bucko!");
+    // if incorrect, append "wrong" to section
+    wrongAnswerUser();
   }
-
-  // if incorrect, append "wrong" to section
 });
