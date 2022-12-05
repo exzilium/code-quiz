@@ -1,11 +1,11 @@
 // --- GLOBAL VARIABLES ---
 
-// variables for Start elements
+// Start elements
 var startSection = document.querySelector("#start-section");
 var startBtn = document.querySelector("#start-btn");
 var startClass = document.querySelector("#start-section").className;
 
-// variables for Question and Answer elements
+// Question and Answer elements
 var questionSection = document.querySelector("#q-section");
 var questionHead = document.querySelector("#q-head");
 var questionBtnDiv = document.querySelector("#q-btns");
@@ -13,6 +13,14 @@ var answerBtn1 = document.querySelector("#btn1");
 var answerBtn2 = document.querySelector("#btn2");
 var answerBtn3 = document.querySelector("#btn3");
 var answerBtn4 = document.querySelector("#btn4");
+
+// Game Over score and user initials entry
+
+var gameOverSection = document.querySelector("#gameover-section");
+
+// High Score screen
+
+var highScoreSection = document.querySelector("#score-section");
 
 // variables for win state
 
@@ -86,12 +94,39 @@ var question4 = {
 // --- FUNCTIONS SECTION ---
 
 // Functions to be called when user clicks start button
+
+// Visible and hidden class update functions to hide/display html sections
+
+// start section
 startSectionHide = function () {
   startSection.className = "start hidden";
 };
+startSectionDisplay = function () {
+  startSection.className = "start visible";
+};
 
+// question section
+questionSectionHide = function () {
+  questionSection.className = "question hidden";
+};
 questionSectionDisplay = function () {
   questionSection.className = "question visible";
+};
+// game over section
+gameOverSectionHide = function () {
+  gameOverSection.className = "gameover hidden";
+};
+
+gameOverSectionDisplay = function () {
+  gameOverSection.className = "gameover visible";
+};
+
+// high score section
+highScoreSectionHide = function () {
+  highScoreSection.className = "score hidden";
+};
+highScoreSectionDisplay = function () {
+  highScoreSection.className = "score visible";
 };
 
 // Timer functionality
@@ -102,8 +137,8 @@ function startTimer() {
     timerDisplay.textContent = timerCount;
     if (timerCount > 0 && isWin) {
       // Tests if win condition is met
-        clearInterval(timer);
-        gameOver();
+      clearInterval(timer);
+      gameOver();
     }
     // Tests if time has run out
     if (timerCount <= 0) {
@@ -121,10 +156,11 @@ function startTimer() {
 
 var gameOver = function () {
   console.log("Game over, mate");
-  
+  questionSectionHide();
+  gameOverSectionDisplay();
 };
 
-// function for WRONG ANSWER
+// WRONG ANSWER
 
 var wrongAnswerUser = function () {
   // Create Wrong Answer HTML and append to question section
@@ -137,13 +173,11 @@ var wrongAnswerUser = function () {
   // Remove time from timerCount
   timerCount = timerCount - 5;
 
-  // Timer to remove HTML
+  // Timer to remove "Wrong" message after 1.5 seconds
   setTimeout(function () {
     wrongAnswerP.remove();
     wrongAnswerHR.remove();
   }, 1500);
-
-  // To add, functionality to remove time from timer
 };
 
 // --- QUESTION FUNCTIONS ---
@@ -278,3 +312,26 @@ questionBtnDiv.addEventListener("click", function (event) {
     return;
   }
 });
+
+// GAME OVER USER SUBMIT FORM
+
+// form
+var submitForm = document.querySelector("#submitForm");
+
+// function - event handler for form submission
+function handleForm(event) {
+  event.preventDefault();
+  var userInitials = document.querySelector("#user-initials").value;
+  console.log("User: " + userInitials + " Score: " + timerCount);
+  var gameScore = {
+    playerInitial: userInitials.toUpperCase().trim(),
+    playserScore: timerCount,
+  };
+  console.log(gameScore);
+  localStorage.setItem("score", JSON.stringify(gameScore));
+  gameOverSectionHide();
+  highScoreSectionDisplay();
+}
+
+// Event listener for submit form
+submitForm.addEventListener("submit", handleForm);

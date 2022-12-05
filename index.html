@@ -22,6 +22,7 @@
         <p id="start-desc">Test your might!</p>
         <button id="start-btn">START</button>
       </section>
+
       <!-- Question and Answer Section -->
       <section id="q-section" class="question hidden">
         <h2 id="q-head" data-question="unknown">question 1</h2>
@@ -31,22 +32,22 @@
           <button id="btn3" data-correct="unknown">answer 3</button>
           <button id="btn4" data-correct="unknown">answer 4</button>
         </div>
-        </section>
+      </section>
 
-        <!-- Game Over Enter Score Section -->
-        <section id="gameover-section" class="gameover hidden">
-          <h1 id="gameover-head">Finished!</h1>
-          <p id="gameover-desc">
-            Your final score is: <span id="userscore"></span>
-          </p>
-          <form>
-            <label for="user-initials">Enter Intials: </label><br>
-            <input type="text" id="user-initials" name="user-initials">
-            <input type="submit" value="Submit">
+      <!-- Game Over Enter Score Section -->
+      <section id="gameover-section" class="gameover hidden">
+        <h1 id="gameover-head">Finished!</h1>
+        <p id="gameover-desc">
+          Your final score is: <span id="userscore"></span>
+        </p>
+        <form id="submitForm">
+          <label for="user-initials">Enter Intials: </label>
+          <input type="text" id="user-initials" name="user-initials" />
+          <input type="submit" value="Submit" />
         </form>
-        </section>
+      </section>
 
-        <!-- High Score List Section -->
+      <!-- High Score List Section -->
       <section id="score-section" class="score hidden">
         <h1 id="score-head">High Scores</h1>
         <div id="score-list">
