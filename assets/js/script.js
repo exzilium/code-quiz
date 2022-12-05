@@ -100,22 +100,29 @@ function startTimer() {
   timer = setInterval(function () {
     timerCount--;
     timerDisplay.textContent = timerCount;
-    if (timerCount >= 0) {
+    if (timerCount > 0 && isWin) {
       // Tests if win condition is met
-      if (isWin && timerCount > 0) {
-        // Clears interval and stops timer
         clearInterval(timer);
-        winGame();
-      }
+        gameOver();
     }
     // Tests if time has run out
-    if (timerCount === 0) {
+    if (timerCount <= 0) {
       // Clears interval
       clearInterval(timer);
-      loseGame();
+      // in case of negative score, set to 0
+      timerCount = 0;
+      timerDisplay.textContent = timerCount;
+      gameOver();
     }
   }, 1000);
 }
+
+// GAME OVER
+
+var gameOver = function () {
+  console.log("Game over, mate");
+  
+};
 
 // function for WRONG ANSWER
 
