@@ -14,18 +14,32 @@ var answerBtn2 = document.querySelector("#btn2");
 var answerBtn3 = document.querySelector("#btn3");
 var answerBtn4 = document.querySelector("#btn4");
 
-// variables for Question Objects to store answers
+// QUESTION variables for Question Objects to store answers
 
+// QUESTION 1
 var question1 = {
   question: "Question one text",
+  correct: function () {
+    return this.answer4;},
   answer1: "Incorrect Answer 1",
   answer2: "Incorrect Answer 2",
   answer3: "Incorrect Answer 3",
-  answer4: "Correct Answer",
+  answer4: "Correct Answer"
+};
+
+// QUESTION 2
+var question2 = {
+  question: "Question TWO text",
+  answer1: "Incorrect Answer 1",
+  answer2: "Incorrect Answer 2",
+  answer3: "Correct Answer",
+  answer4: "Incorrect Answer 3",
   correct: function () {
-    return this.answer4;
+    return this.answer3;
   },
 };
+
+// ^ End of Questions ^
 
 // ^ End of global variable ^
 
@@ -56,6 +70,23 @@ var question1Text = function () {
   answerBtn2.dataset.correct = question1.correct();
   answerBtn3.dataset.correct = question1.correct();
   answerBtn4.dataset.correct = question1.correct();
+}
+  // Question 2 population
+var question2Text = function () {
+  // Populate question header with question1 object question property
+  questionHead.textContent = question2.question;
+
+  // Populate answer button text
+  answerBtn1.textContent = question2.answer1;
+  answerBtn2.textContent = question2.answer2;
+  answerBtn3.textContent = question2.answer3;
+  answerBtn4.textContent = question2.answer4;
+
+  // Update answer button data-correct attribute to compare click event with correct answer
+  answerBtn1.dataset.correct = question2.correct();
+  answerBtn2.dataset.correct = question2.correct();
+  answerBtn3.dataset.correct = question2.correct();
+  answerBtn4.dataset.correct = question2.correct();
 };
 
 // ^ End of Functions ^
@@ -84,6 +115,8 @@ questionBtnDiv.addEventListener("click", function (event) {
   // if correct run populate next question
   if (event.target.textContent === question1.correct()) {
     console.log("Correct Answer selected!");
+    question2Text();
+
   } else {
     console.log("Wrong answer, bucko!");
   }
