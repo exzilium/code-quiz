@@ -3,7 +3,6 @@
 // stored scores from previous games in local storage
 
 var prevScores = [];
-console.log(Array.isArray(prevScores));
 
 // Start elements
 var startSection = document.querySelector("#start-section");
@@ -113,14 +112,9 @@ var question4 = {
 init = function () {
   // get scores
   var storedScores = JSON.parse(localStorage.getItem("score"));
-  console.log("Stored wins: " + storedScores);
-  console.log(storedScores);
-  console.log(Array.isArray(prevScores));
 
   if (storedScores !== null) {
     prevScores = storedScores;
-    console.log(prevScores);
-    console.log(Array.isArray(prevScores));
   }
 };
 
@@ -168,7 +162,6 @@ highScoreSectionDisplay = function () {
   startTimerHeader.className = "hidden";
   // load scores from local storage
   var storedScores = JSON.parse(localStorage.getItem("score"));
-  console.log(storedScores);
 
   for (let i = 0; i < storedScores.length; i++) {
     var scoreDisplayItem = document.createElement("li");
@@ -203,7 +196,6 @@ function startTimer() {
 // GAME OVER
 
 var gameOver = function () {
-  console.log("Game over, mate");
   questionSectionHide();
   gameOverSectionDisplay();
 };
@@ -337,7 +329,6 @@ var question4Text = function () {
 
 // START button click event listener
 startBtn.addEventListener("click", function () {
-  console.log("start!");
   // isWin condition reset
   isWin = false;
   // Timer start
@@ -360,21 +351,18 @@ questionBtnDiv.addEventListener("click", function (event) {
     questionHead.dataset.question === "1" &&
     event.target.textContent === question1.correct()
   ) {
-    console.log("Correct Answer selected 1!");
     rightAnswerUser();
     question2Text();
   } else if (
     questionHead.dataset.question === "2" &&
     event.target.textContent === question2.correct()
   ) {
-    console.log("Correct Answer selected 2!");
     rightAnswerUser();
     question3Text();
   } else if (
     questionHead.dataset.question === "3" &&
     event.target.textContent === question3.correct()
   ) {
-    console.log("Correct Answer selected 3!");
     rightAnswerUser();
     question4Text();
   } else if (
@@ -382,11 +370,9 @@ questionBtnDiv.addEventListener("click", function (event) {
     event.target.textContent === question4.correct()
   ) {
     // Winner is true when end of questions is reached
-    console.log("End of Questions");
     rightAnswerUser();
     return (isWin = true);
   } else {
-    console.log("Wrong answer, bucko!");
     // if incorrect, append "wrong" to section
     wrongAnswerUser();
     return;
@@ -405,13 +391,9 @@ function handleForm(event) {
 
   var gameScore = userInitials.toUpperCase().trim() + ": " + timerCount;
 
-  console.log(gameScore);
-
   // add newest score to front of the full scores list
   prevScores.unshift(gameScore);
 
-  console.log(prevScores);
-  console.log(Array.isArray(prevScores));
   localStorage.setItem("score", JSON.stringify(prevScores));
 
   // hide / display html
