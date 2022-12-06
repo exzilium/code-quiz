@@ -3,7 +3,7 @@
 }
 
 .visible {
-  display: block;
+  display: inline-block;
 }
 
 .hidden {
@@ -20,13 +20,13 @@ header h3 {
 }
 
 header button {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 main {
@@ -62,10 +62,10 @@ main button {
 }
 
 #submit-btn {
-    background-color: #09b84f;
-    border-radius: 10px;
-    color: white;
-    margin: 10px;
-    padding: 5px 5px;
-    cursor: pointer;
-  }
+  background-color: #09b84f;
+  border-radius: 10px;
+  color: white;
+  margin: 10px;
+  padding: 5px 5px;
+  cursor: pointer;
+}

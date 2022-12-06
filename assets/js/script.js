@@ -2,13 +2,15 @@
 
 // stored scores from previous games in local storage
 
-// var prevScores = [];
-// console.log(prevScores.isArray);
+var prevScores = [];
+console.log(Array.isArray(prevScores));
 
 // Start elements
 var startSection = document.querySelector("#start-section");
 var startBtn = document.querySelector("#start-btn");
 var startClass = document.querySelector("#start-section").className;
+var startHighScore = document.querySelector("#highscore-btn");
+var startTimerHeader = document.querySelector("#timer-container");
 
 // Question and Answer elements
 var questionSection = document.querySelector("#q-section");
@@ -103,18 +105,19 @@ var question4 = {
 
 // INIT
 
-// init = function () {
-//   // get scores
-//   var storedScores = JSON.parse(localStorage.getItem("score"));
-//   console.log("Stored wins: " + storedScores);
+init = function () {
+  // get scores
+  var storedScores = JSON.parse(localStorage.getItem("score"));
+  console.log("Stored wins: " + storedScores);
+  console.log(storedScores);
+  console.log(Array.isArray(prevScores));
 
-//   if (storedScores !== null) {
-//     prevScores = [storedScores];
-//     console.log(prevScores);
-//     console.log(prevScores.isArray);
-
-//   }
-// };
+  if (storedScores !== null) {
+    prevScores = storedScores;
+    console.log(prevScores);
+    console.log(Array.isArray(prevScores));
+  }
+};
 
 // Functions to be called when user clicks start button
 
@@ -126,6 +129,9 @@ startSectionHide = function () {
 };
 startSectionDisplay = function () {
   startSection.className = "start visible";
+  startHighScore.className = "visible";
+  startTimerHeader.className = "visible";
+  timerDisplay.textContent = "";
 };
 
 // question section
@@ -151,14 +157,18 @@ highScoreSectionHide = function () {
 highScoreSectionDisplay = function () {
   // score screen visible
   highScoreSection.className = "score visible";
+  // hide high score and timer
+  startHighScore.className = "hidden";
+  startTimerHeader.className = "hidden";
   // load scores from local storage
   var storedScores = JSON.parse(localStorage.getItem("score"));
   console.log(storedScores);
 
-  // display score
-  var scoreDisplayItem = document.createElement("li");
-  scoreDisplayItem.innerHTML = storedScores;
-  scoreList.appendChild(scoreDisplayItem);
+  for (let i = 0; i < storedScores.length; i++) {
+    var scoreDisplayItem = document.createElement("li");
+    scoreDisplayItem.innerHTML = storedScores[i];
+    scoreList.appendChild(scoreDisplayItem);
+  }
 };
 
 // Timer functionality
@@ -297,7 +307,7 @@ startBtn.addEventListener("click", function () {
   // isWin condition reset
   isWin = false;
   // Timer start
-  timerCount = 60;
+  timerCount = 31;
   startTimer();
   // Hide Start Section
   startSectionHide();
@@ -356,12 +366,15 @@ function handleForm(event) {
   var userInitials = document.querySelector("#user-initials").value;
 
   var gameScore = userInitials.toUpperCase().trim() + ": " + timerCount;
+
   console.log(gameScore);
 
-  //   console.log(prevScores.isArray);
-  //   prevScores.unshift(gameScore);
+  // add newest score to front of the full scores list
+  prevScores.unshift(gameScore);
 
-  localStorage.setItem("score", JSON.stringify(gameScore));
+  console.log(prevScores);
+  console.log(Array.isArray(prevScores));
+  localStorage.setItem("score", JSON.stringify(prevScores));
 
   // hide / display html
   gameOverSectionHide();
@@ -373,18 +386,23 @@ submitForm.addEventListener("submit", handleForm);
 
 // Event listener for Go Back
 
-goBack.addEventListener("click", function() {
-    highScoreSectionHide();
-    startSectionDisplay();
+goBack.addEventListener("click", function () {
+  highScoreSectionHide();
+  startSectionDisplay();
 });
 
+// Event listener for Clear Highscores
 
-// Even listener for Clear Highscores
+clearScores.addEventListener("click", function () {
+  localStorage.clear("score");
+});
 
-clearScores.addEventListener("click", function() {
- localStorage.clear("score");
+// Event listener for High Scores nav button
+
+startHighScore.addEventListener("click", function () {
+  startSectionHide();
+  highScoreSectionDisplay();
 });
 
 // Initial function
-
-// init();
+init();
