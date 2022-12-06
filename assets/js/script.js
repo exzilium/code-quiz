@@ -222,6 +222,14 @@ var wrongAnswerUser = function () {
   }, 1500);
 };
 
+// CLEAR SCORES
+
+var removeHighScores = function (parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+};
+
 // --- QUESTION FUNCTIONS ---
 
 // Question 1 population (after START)
@@ -379,6 +387,7 @@ function handleForm(event) {
   // hide / display html
   gameOverSectionHide();
   highScoreSectionDisplay();
+  submitForm.reset();
 }
 
 // Event listener for submit form
@@ -389,12 +398,14 @@ submitForm.addEventListener("submit", handleForm);
 goBack.addEventListener("click", function () {
   highScoreSectionHide();
   startSectionDisplay();
+  removeHighScores(scoreList);
 });
 
 // Event listener for Clear Highscores
 
 clearScores.addEventListener("click", function () {
   localStorage.clear("score");
+  removeHighScores(scoreList);
 });
 
 // Event listener for High Scores nav button
