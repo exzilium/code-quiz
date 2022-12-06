@@ -27,6 +27,8 @@ var gameOverSection = document.querySelector("#gameover-section");
 
 var highScoreSection = document.querySelector("#score-section");
 var scoreList = document.querySelector("#score-list");
+var goBack = document.querySelector("#back-btn");
+var clearScores = document.querySelector("#clear-btn");
 
 // variables for win state
 
@@ -368,6 +370,20 @@ function handleForm(event) {
 
 // Event listener for submit form
 submitForm.addEventListener("submit", handleForm);
+
+// Event listener for Go Back
+
+goBack.addEventListener("click", function() {
+    highScoreSectionHide();
+    startSectionDisplay();
+});
+
+
+// Even listener for Clear Highscores
+
+clearScores.addEventListener("click", function() {
+ localStorage.clear("score");
+});
 
 // Initial function
 
