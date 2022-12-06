@@ -24,6 +24,7 @@ var answerBtn4 = document.querySelector("#btn4");
 // Game Over score and user initials entry
 
 var gameOverSection = document.querySelector("#gameover-section");
+var gameOverUserScore = document.querySelector("#userscore");
 
 // High Score screen
 
@@ -148,6 +149,7 @@ gameOverSectionHide = function () {
 
 gameOverSectionDisplay = function () {
   gameOverSection.className = "gameover visible";
+  gameOverUserScore.innerHTML = timerCount;
 };
 
 // high score section
