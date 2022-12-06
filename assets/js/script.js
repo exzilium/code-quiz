@@ -1,5 +1,10 @@
 // --- GLOBAL VARIABLES ---
 
+// stored scores from previous games in local storage
+
+// var prevScores = [];
+// console.log(prevScores.isArray);
+
 // Start elements
 var startSection = document.querySelector("#start-section");
 var startBtn = document.querySelector("#start-btn");
@@ -21,6 +26,7 @@ var gameOverSection = document.querySelector("#gameover-section");
 // High Score screen
 
 var highScoreSection = document.querySelector("#score-section");
+var scoreList = document.querySelector("#score-list");
 
 // variables for win state
 
@@ -93,6 +99,21 @@ var question4 = {
 
 // --- FUNCTIONS SECTION ---
 
+// INIT
+
+// init = function () {
+//   // get scores
+//   var storedScores = JSON.parse(localStorage.getItem("score"));
+//   console.log("Stored wins: " + storedScores);
+
+//   if (storedScores !== null) {
+//     prevScores = [storedScores];
+//     console.log(prevScores);
+//     console.log(prevScores.isArray);
+
+//   }
+// };
+
 // Functions to be called when user clicks start button
 
 // Visible and hidden class update functions to hide/display html sections
@@ -126,7 +147,16 @@ highScoreSectionHide = function () {
   highScoreSection.className = "score hidden";
 };
 highScoreSectionDisplay = function () {
+  // score screen visible
   highScoreSection.className = "score visible";
+  // load scores from local storage
+  var storedScores = JSON.parse(localStorage.getItem("score"));
+  console.log(storedScores);
+
+  // display score
+  var scoreDisplayItem = document.createElement("li");
+  scoreDisplayItem.innerHTML = storedScores;
+  scoreList.appendChild(scoreDisplayItem);
 };
 
 // Timer functionality
@@ -322,16 +352,23 @@ var submitForm = document.querySelector("#submitForm");
 function handleForm(event) {
   event.preventDefault();
   var userInitials = document.querySelector("#user-initials").value;
-  console.log("User: " + userInitials + " Score: " + timerCount);
-  var gameScore = {
-    playerInitial: userInitials.toUpperCase().trim(),
-    playserScore: timerCount,
-  };
+
+  var gameScore = userInitials.toUpperCase().trim() + ": " + timerCount;
   console.log(gameScore);
+
+  //   console.log(prevScores.isArray);
+  //   prevScores.unshift(gameScore);
+
   localStorage.setItem("score", JSON.stringify(gameScore));
+
+  // hide / display html
   gameOverSectionHide();
   highScoreSectionDisplay();
 }
 
 // Event listener for submit form
 submitForm.addEventListener("submit", handleForm);
+
+// Initial function
+
+// init();
