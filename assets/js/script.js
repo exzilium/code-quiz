@@ -49,25 +49,25 @@ var timerCount;
 // QUESTION 1
 var question1 = {
   questionNumber: 1,
-  question: "Question one text",
+  question: "Inside which HTML element should you put the JavaScript link?",
   correct: function () {
     return this.answer4;
   },
-  answer1: "Incorrect Answer 1",
-  answer2: "Incorrect Answer 2",
-  answer3: "Incorrect Answer 3",
-  answer4: "Correct Answer",
+  answer1: "<style>",
+  answer2: "<a href>",
+  answer3: "<js>",
+  answer4: "<script>",
 };
 
 // QUESTION 2
 var question2 = {
   questionNumber: 2,
 
-  question: "Question TWO text",
-  answer1: "Incorrect Answer 1",
-  answer2: "Incorrect Answer 2",
-  answer3: "Correct Answer",
-  answer4: "Incorrect Answer 3",
+  question: "How can you write an IF statement in JavaScript?",
+  answer1: "if i = 0",
+  answer2: "if / then",
+  answer3: "if (i == 0)",
+  answer4: "iffy",
   correct: function () {
     return this.answer3;
   },
@@ -76,11 +76,15 @@ var question2 = {
 // QUESTION 3
 var question3 = {
   questionNumber: 3,
-  question: "Question THREE text",
-  answer1: "Incorrect Answer 1",
-  answer2: "Correct Answer",
-  answer3: "Incorrect Answer 2",
-  answer4: "Incorrect Answer 3",
+  question: "What is the right way to write an array in JavaScript?",
+  answer1:
+    "var cars = 'magic school bus', 'windowless van', 'big honkin truck'",
+  answer2:
+    "var cars = ['magic school bus', 'windowless van', 'big honkin truck']",
+  answer3:
+    "var cars = (magic school bus), (windowless van), (big honkin truck)",
+  answer4:
+    "var cars = 1: magic school bus, 2: windowless van, 3: big honkin truck",
   correct: function () {
     return this.answer2;
   },
@@ -89,11 +93,11 @@ var question3 = {
 // QUESTION 4
 var question4 = {
   questionNumber: 4,
-  question: "Question FOUR text",
-  answer1: "Correct Answer",
-  answer2: "Incorrect Answer 1",
-  answer3: "Incorrect Answer 2",
-  answer4: "Incorrect Answer 3",
+  question: "Which event occurs when the user clicks on an HTML element?",
+  answer1: "onclick",
+  answer2: "Frustrated User",
+  answer3: "onmouseclick",
+  answer4: "keydown",
   correct: function () {
     return this.answer1;
   },
@@ -224,6 +228,26 @@ var wrongAnswerUser = function () {
   }, 1500);
 };
 
+// RIGHT ANSWER (USING WRONG ANSWER ELEMENTS FROM ABOVE)
+
+var rightAnswerUser = function () {
+  // Create Right Answer HTML and append to question section
+  var wrongAnswerP = document.createElement("p");
+  var wrongAnswerHR = document.createElement("hr");
+  wrongAnswerP.innerHTML = "Correct!";
+  questionSection.appendChild(wrongAnswerHR);
+  questionSection.appendChild(wrongAnswerP);
+
+  // Remove time from timerCount
+  timerCount = timerCount - 5;
+
+  // Timer to remove "Correct" message after .5 seconds
+  setTimeout(function () {
+    wrongAnswerP.remove();
+    wrongAnswerHR.remove();
+  }, 500);
+};
+
 // CLEAR SCORES
 
 var removeHighScores = function (parent) {
@@ -317,7 +341,7 @@ startBtn.addEventListener("click", function () {
   // isWin condition reset
   isWin = false;
   // Timer start
-  timerCount = 31;
+  timerCount = 61;
   startTimer();
   // Hide Start Section
   startSectionHide();
@@ -337,18 +361,21 @@ questionBtnDiv.addEventListener("click", function (event) {
     event.target.textContent === question1.correct()
   ) {
     console.log("Correct Answer selected 1!");
+    rightAnswerUser();
     question2Text();
   } else if (
     questionHead.dataset.question === "2" &&
     event.target.textContent === question2.correct()
   ) {
     console.log("Correct Answer selected 2!");
+    rightAnswerUser();
     question3Text();
   } else if (
     questionHead.dataset.question === "3" &&
     event.target.textContent === question3.correct()
   ) {
     console.log("Correct Answer selected 3!");
+    rightAnswerUser();
     question4Text();
   } else if (
     questionHead.dataset.question === "4" &&
@@ -356,6 +383,7 @@ questionBtnDiv.addEventListener("click", function (event) {
   ) {
     // Winner is true when end of questions is reached
     console.log("End of Questions");
+    rightAnswerUser();
     return (isWin = true);
   } else {
     console.log("Wrong answer, bucko!");
