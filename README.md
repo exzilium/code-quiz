@@ -11,7 +11,7 @@ The game will end if you answer all questions successfully of you run out of tim
 
 Please see 'Usage' for instructions.
 
-![screenshot of the password generator](./assets/images/codequiz_screenshot.png)
+![screenshot of the code quiz](./assets/images/codequiz_screenshot.png)
 
 ## Usage
 
